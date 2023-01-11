@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+    mysqldb:
+        container_name: mysqldb-{{APPNAME}}
+        image: mysql:latest
+        cap_add:
+        - SYS_NICE
+        environment:
+        - MYSQL_ROOT_PASSWORD=password
+        volumes:
+        - ./init:/docker-entrypoint-initdb.d
+        - mysqlVolume:/var/lib/mysql
+        - mysqlConfig:/etc/mysql
+    {{APPNAME}}:
+        container_name: {{APPNAME}}
+        build:
+            context: .
+        volumes:
+            - .:/app
+        ports:
+        - 80:5000
+        depends_on:
+            - mysqldb
+
+volumes:
+    mysqlVolume:
+    mysqlConfig:

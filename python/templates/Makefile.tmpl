@@ -1,0 +1,19 @@
+APPNAME={{APPNAME}}
+
+image:
+	docker-compose up
+
+stop:
+	docker-compose stop
+	
+cleanup: stop
+	docker-compose rm -f -v
+
+run_sql:
+	docker exec -it mysqldb bash
+
+see_sql_infos:
+	docker inspect mysqldb-$(APPNAME)
+
+run_app_container:
+	docker exec -it $(APPNAME) bash
