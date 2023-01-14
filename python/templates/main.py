@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def get_something():
-    return "<h1>sssssss</h1>"
+    return "<h1>Hello World</h1>"
 
 
 @app.route("/other")
